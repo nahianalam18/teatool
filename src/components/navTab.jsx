@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import homeTab from "./home";
+import StudentList from "./listStudent";
 import { Tabs, Button, Icon } from "antd";
 
 const { TabPane } = Tabs;
@@ -12,14 +12,15 @@ class TopTab extends Component {
     return (
       <div>
         <Tabs tabBarExtraContent={operations}>
-          <Icon type="home" />
-          <TabPane className="TabContent" tab="Home" key="1">
-            content of tab2
+          <TabPane tab="Tab 1" key="1">
+            <header className="App-header">
+              <h1>Hello World</h1>
+            </header>
           </TabPane>
-          <TabPane className="TabContent" tab="Tab 2" key="2">
-            Content of tab 2
+          <TabPane tab="Student List" key="2">
+            <StudentList></StudentList>
           </TabPane>
-          <TabPane className="TabContent" tab="Tab 3" key="3">
+          <TabPane tab="Tab 3" key="3">
             Content of tab 3
           </TabPane>
         </Tabs>
