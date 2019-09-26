@@ -6,34 +6,40 @@ import RaisedButton from "material-ui/RaisedButton";
 
 export class FormUserDetails extends Component {
   continue = e => {
-    e.preventDefault();
+    e.preventDefault(); // Function used to handle continue
     this.props.nextStep();
   };
   render() {
-    // const { values } = this.props.values;
     return (
       <MuiThemeProvider>
         <React.Fragment>
-          <AppBar title="Enter User Details"></AppBar>
-          <TextField
-            hintText="Enter your First Name"
+          <AppBar title="Enter Student Details"></AppBar>
+          <TextField // Text Fields to let the Teacher enter data of the student
+            hintText="First name of the student"
             floatingLabelText="First Name"
             onChange={this.props.handleChange("firstname")}
             defaultValue={this.props.values.firstname}
           />
           <br />
           <TextField
-            hintText="Enter your Last Name"
+            hintText="Last name of the student"
             floatingLabelText="Last Name"
             onChange={this.props.handleChange("lastname")}
-            defaultValue={this.props.values.firstname}
+            defaultValue={this.props.values.lastname}
           />
           <br />
           <TextField
-            hintText="Enter your Email"
-            floatingLabelText="Email"
-            onChange={this.props.handleChange("email")}
-            defaultValue={this.props.values.email}
+            hintText="Enter grade of the student"
+            floatingLabelText="Grade"
+            onChange={this.props.handleChange("grade")}
+            defaultValue={this.props.values.grade}
+          />
+          <br></br>
+          <TextField
+            hintText="Enter age of the student"
+            floatingLabelText="Age"
+            onChange={this.props.handleChange("age")}
+            defaultValue={this.props.values.age}
           />
           <br />
           <RaisedButton
@@ -47,9 +53,5 @@ export class FormUserDetails extends Component {
     );
   }
 }
-const styles = {
-  button: {
-    margin: 15
-  }
-};
+
 export default FormUserDetails;

@@ -6,39 +6,32 @@ import RaisedButton from "material-ui/RaisedButton";
 
 export class FormPersonalDetails extends Component {
   continue = e => {
+    // Function used to handle continue button click
     e.preventDefault();
     this.props.nextStep();
   };
-
+  // Function used to go back to previous Menu
   back = e => {
     e.preventDefault();
     this.props.prevStep();
   };
   render() {
-    // const { values } = this.props.values;
     return (
       <MuiThemeProvider>
         <React.Fragment>
           <AppBar title="Enter Personal Details"></AppBar>
-          <TextField
-            hintText="Enter your Occupation"
-            floatingLabelText="Occupation"
-            onChange={this.props.handleChange("occupation")}
-            defaultValue={this.props.values.occupation}
+          <TextField // Text Fields to enter some personal details of the student
+            hintText="Make some notes"
+            floatingLabelText="Notes"
+            onChange={this.props.handleChange("notes")}
+            defaultValue={this.props.values.notes}
           />
           <br />
           <TextField
-            hintText="Enter your City"
-            floatingLabelText="City"
-            onChange={this.props.handleChange("city")}
-            defaultValue={this.props.values.city}
-          />
-          <br />
-          <TextField
-            hintText="Enter your Bio"
-            floatingLabelText="Bio"
-            onChange={this.props.handleChange("bio")}
-            defaultValue={this.props.values.bio}
+            hintText="Enter the parent's email"
+            floatingLabelText="parentemail"
+            onChange={this.props.handleChange("parentemail")}
+            defaultValue={this.props.values.parentemail}
           />
           <br />
           <RaisedButton
@@ -58,9 +51,5 @@ export class FormPersonalDetails extends Component {
     );
   }
 }
-const styles = {
-  button: {
-    margin: 15
-  }
-};
+
 export default FormPersonalDetails;

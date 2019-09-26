@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import StudentList from "./listStudent";
-import { Tabs, Button, Icon } from "antd";
+import { Tabs, Button } from "antd";
 
 const { TabPane } = Tabs;
 

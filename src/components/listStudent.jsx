@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Collapse } from "antd";
+import { Collapse, Icon } from "antd";
 import UserForm from "./UserForm";
 const { Panel } = Collapse;
 
@@ -8,101 +8,169 @@ class StudentList extends Component {
     students: [
       {
         id: 1,
-        name: "Virgina Dootson",
-        phone: "258-514-9711",
-        notes: "core",
-        interestLevel: "Kinda"
+        firstname: "Catherine",
+        lastname: "Bullers",
+        grade: "1.0.7",
+        age: 9,
+        notes: "Macropus eugenii",
+        parentemail: "cbullers0@meetup.com"
       },
       {
         id: 2,
-        name: "Kettie Fallows",
-        phone: "826-430-4783",
-        notes: "Open-architected",
-        interestLevel: "Alot"
+        firstname: "Annadiana",
+        lastname: "De Ferrari",
+        grade: "7.9.0",
+        age: 5,
+        notes: "Prionace glauca",
+        parentemail: "adeferrari1@youtu.be"
       },
       {
         id: 3,
-        name: "Sherwynd Carlick",
-        phone: "429-535-8582",
-        notes: "throughput",
-        interestLevel: "NotMuch"
+        firstname: "Riley",
+        lastname: "Fretson",
+        grade: "0.7.3",
+        age: 5,
+        notes: "Psittacula krameri",
+        parentemail: "rfretson2@mozilla.com"
       },
       {
         id: 4,
-        name: "Sherwynd Oram",
-        phone: "716-944-2727",
-        notes: "zero administration",
-        interestLevel: "Alot"
+        firstname: "Clim",
+        lastname: "Eglise",
+        grade: "5.32",
+        age: 6,
+        notes: "unavailable",
+        parentemail: "ceglise3@feedburner.com"
       },
       {
         id: 5,
-        name: "Salomon Victoria",
-        phone: "894-798-6827",
-        notes: "coherent",
-        interestLevel: "Alot"
+        firstname: "Vanya",
+        lastname: "Bewshaw",
+        grade: "5.7.8",
+        age: 9,
+        notes: "Acridotheres tristis",
+        parentemail: "vbewshaw4@earthlink.net"
       },
       {
         id: 6,
-        name: "Annis Matovic",
-        phone: "414-779-6902",
-        notes: "Public-key",
-        interestLevel: "NotMuch"
+        firstname: "Joseito",
+        lastname: "Slayford",
+        grade: "5.2",
+        age: 7,
+        notes: "Macaca radiata",
+        parentemail: "jslayford5@ning.com"
       },
       {
         id: 7,
-        name: "Linc Siegertsz",
-        phone: "241-791-0263",
-        notes: "grid-enabled",
-        interestLevel: "Alot"
+        firstname: "Bride",
+        lastname: "Fullbrook",
+        grade: "7.3.0",
+        age: 7,
+        notes: "Lamprotornis superbus",
+        parentemail: "bfullbrook6@youtu.be"
       },
       {
         id: 8,
-        name: "Rodie Thyng",
-        phone: "971-870-7928",
-        notes: "workforce",
-        interestLevel: "Kinda"
+        firstname: "Kristine",
+        lastname: "Baiden",
+        grade: "0.3.6",
+        age: 6,
+        notes: "Helogale undulata",
+        parentemail: "kbaiden7@timesonline.co.uk"
       },
       {
         id: 9,
-        name: "Pat Matula",
-        phone: "323-833-8956",
-        notes: "Total",
-        interestLevel: "Kinda"
+        firstname: "Richy",
+        lastname: "Routham",
+        grade: "0.17",
+        age: 6,
+        notes: "Vulpes vulpes",
+        parentemail: "rroutham8@fema.gov"
       },
       {
         id: 10,
-        name: "Faun Theuss",
-        phone: "178-565-3698",
-        notes: "next generation",
-        interestLevel: "NotMuch"
+        firstname: "Stephie",
+        lastname: "Nerne",
+        grade: "0.85",
+        age: 6,
+        notes: "Chauna torquata",
+        parentemail: "snerne9@nbcnews.com"
+      },
+      {
+        id: 11,
+        firstname: "Amil",
+        lastname: "Diwell",
+        grade: "0.73",
+        age: 7,
+        notes: "Spheniscus magellanicus",
+        parentemail: "adiwella@npr.org"
+      },
+      {
+        id: 12,
+        firstname: "Kristel",
+        lastname: "Kacheler",
+        grade: "1.0.4",
+        age: 10,
+        notes: "Vulpes vulpes",
+        parentemail: "kkachelerb@dmoz.org"
       }
     ]
   };
 
   addStudent = e => {
     const student = {
-      ...e,
+      firstname: e.firstname,
+      lastname: e.lastname,
+      grade: e.grade,
+      age: e.age,
+      parentemail: e.parentemail,
+      notes: e.notes,
       id: this.state.students.length + 1
     };
+    console.log(student);
     let students = [...this.state.students, student];
     this.setState({
       students: students
     });
   };
+
+  customPanelStyle = {
+    background: "#1c1f75",
+    borderRadius: 44,
+    marginBottom: 24,
+    border: 0,
+    overflow: "hidden"
+  };
+
   render() {
     return (
       <div>
         <div className="CenterA">
-          <UserForm />
+          <Collapse
+            bordered={false}
+            defaultActiveKey={["1"]}
+            expandIcon={({ isActive }) => (
+              <Icon type="caret-right" rotate={isActive ? 90 : 0} />
+            )}
+          >
+            <Panel header="Add New Student">
+              <UserForm userInfo={this.addStudent} />
+            </Panel>
+          </Collapse>
         </div>
         <Collapse>
           {this.state.students.map(student => (
-            <Panel header={student.name} key={student.id}>
-              <span>Contact: {student.phone}</span>
+            <Panel
+              header={student.firstname + " " + student.lastname}
+              key={student.id}
+            >
+              <span>Age: {student.age}</span>
               <br></br>
-              <span>Interest Level: {student.interestLevel}</span>
+              <span>Grade: {student.interestLevel}</span>
               <br></br>
-              <span>Additional Notes: {student.notes}</span>
+              <span>Parent Email: {student.parentemail}</span>
+              <br></br>
+              <span>Notes: {student.notes}</span>
             </Panel>
           ))}
         </Collapse>

@@ -6,8 +6,8 @@ import RaisedButton from "material-ui/RaisedButton";
 
 export class Confirm extends Component {
   continue = e => {
-    e.preventDefault();
     // Process FORM
+    this.props.confirm(e);
     this.props.nextStep();
   };
 
@@ -17,19 +17,21 @@ export class Confirm extends Component {
   };
   render() {
     const {
-      values: { firstname, lastname, email, occupation, city, bio }
+      values: { firstname, lastname, grade, age, notes, parentemail }
     } = this.props;
     return (
       <MuiThemeProvider>
         <React.Fragment>
           <AppBar title="Confirm" />
           <List>
+            {" "}
+            {/* Listing all the data entered by the Teacher  */}
             <ListItem primaryText="First Name" secondaryText={firstname} />
-            <ListItem primaryText="Last tName" secondaryText={lastname} />
-            <ListItem primaryText="Email" secondaryText={email} />
-            <ListItem primaryText="Occupation" secondaryText={occupation} />
-            <ListItem primaryText="City" secondaryText={city} />
-            <ListItem primaryText="Bio" secondaryText={bio} />
+            <ListItem primaryText="Last Name" secondaryText={lastname} />
+            <ListItem primaryText="Grade" secondaryText={grade} />
+            <ListItem primaryText="Age" secondaryText={age} />
+            <ListItem primaryText="Notes" secondaryText={notes} />
+            <ListItem primaryText="Parent Email" secondaryText={parentemail} />
           </List>
           <RaisedButton
             label="Back"
@@ -48,9 +50,9 @@ export class Confirm extends Component {
     );
   }
 }
-const styles = {
-  button: {
-    margin: 15
-  }
-};
+// const styles = {
+//   button: {
+//     margin: 15
+//   }
+// };
 export default Confirm;
