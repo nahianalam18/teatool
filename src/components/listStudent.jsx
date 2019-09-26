@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Collapse } from "antd";
+import UserForm from "./UserForm";
 const { Panel } = Collapse;
 
 class StudentList extends Component {
@@ -91,6 +92,9 @@ class StudentList extends Component {
   render() {
     return (
       <div>
+        <div className="CenterA">
+          <UserForm />
+        </div>
         <Collapse>
           {this.state.students.map(student => (
             <Panel header={student.name} key={student.id}>

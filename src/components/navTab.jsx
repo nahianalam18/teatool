@@ -12,7 +12,7 @@ class TopTab extends Component {
     return (
       <div>
         <Tabs tabBarExtraContent={operations}>
-          <TabPane tab="Tab 1" key="1">
+          <TabPane tab="Home" key="1">
             <header className="App-header">
               <h1>Hello World</h1>
             </header>
