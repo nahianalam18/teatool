@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import StudentList from "./listStudent";
+import Homepage from "./home";
 import { Tabs, Button } from "antd";
 
 const { TabPane } = Tabs;
@@ -13,14 +14,12 @@ class TopTab extends Component {
       <div>
         <Tabs tabBarExtraContent={operations}>
           <TabPane tab="Home" key="1">
-            <header className="App-header">
-              <h1>Hello World</h1>
-            </header>
+            <Homepage></Homepage>
           </TabPane>
           <TabPane tab="Student List" key="2">
             <StudentList></StudentList>
           </TabPane>
-          <TabPane tab="Tab 3" key="3">
+          <TabPane tab="Teacher Profile" key="3">
             Content of tab 3
           </TabPane>
         </Tabs>
