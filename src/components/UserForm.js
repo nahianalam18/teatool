@@ -13,12 +13,15 @@ class UserForm extends Component {
     notes: "",
     parentemail: ""
   };
+
   // Handle Fields Change
   handleChange = input => e => {
     this.setState({ [input]: e.target.value });
   };
 
   resetState = () => {
+    // console.log(firebase.name);
+    // console.log(firebase.database());
     this.setState({
       step: 1,
       firstname: "",

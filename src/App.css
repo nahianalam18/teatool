@@ -17,7 +17,7 @@
   background-color: white;
   height: 100vh;
   text-align: center;
-  padding-top: 1100px;
+  padding-top: 1250px;
   background-image: url("./components/teacher.png");
   background-position: center;
   background-repeat: no-repeat;
@@ -37,13 +37,15 @@
   color: black;
   background: white;
 }
+
 .homemenu {
   background-color: black;
   color: black;
   text-align: center;
   position: sticky;
-  top: 10;
+  top: 0;
   width: 100%;
+  top: 10;
 }
 .home1 {
   background-color: #282c34;

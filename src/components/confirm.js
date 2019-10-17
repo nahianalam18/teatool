@@ -19,6 +19,7 @@ export class Confirm extends Component {
     const {
       values: { firstname, lastname, grade, age, notes, parentemail }
     } = this.props;
+
     return (
       <MuiThemeProvider>
         <React.Fragment>

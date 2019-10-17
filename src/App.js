@@ -5,7 +5,7 @@ import TopTab from "./components/navTab";
 function App() {
   return (
     <div className="App">
-      <TopTab></TopTab>
+      <TopTab />
     </div>
   );
 }

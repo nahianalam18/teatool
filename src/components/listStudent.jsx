@@ -1,7 +1,14 @@
 import React, { Component } from "react";
-import { Collapse, Icon } from "antd";
+import { Collapse, Icon, Button } from "antd";
 import UserForm from "./UserForm";
+import * as Firebase from "firebase";
+import { RaisedButton } from "material-ui";
+import firebaseConfig from "../config";
+
 const { Panel } = Collapse;
+
+Firebase.initializeApp(firebaseConfig);
+Firebase.analytics();
 
 class StudentList extends Component {
   state = {
@@ -116,7 +123,32 @@ class StudentList extends Component {
       }
     ]
   };
+  writeUserData = () => {
+    Firebase.database()
+      .ref("/")
+      .set(this.state);
+    console.log("DATA SAVED");
+  };
 
+  getUserData = () => {
+    let ref = Firebase.database().ref("/");
+    ref.on("value", snapshot => {
+      const state = snapshot.val();
+      this.setState(state);
+    });
+    console.log("DATA RETRIEVED");
+  };
+  componentDidMount() {
+    this.getUserData();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    // check on previous state
+    // only write when it's different with the new state
+    if (prevState !== this.state) {
+      this.writeUserData();
+    }
+  }
   addStudent = e => {
     const student = {
       firstname: e.firstname,
@@ -132,6 +164,12 @@ class StudentList extends Component {
     this.setState({
       students: students
     });
+  };
+  removeData = developer => {
+    console.log(developer);
+    var array = [...this.state.students];
+    array.splice(developer.id - 1, 1);
+    this.setState({ students: array });
   };
 
   customPanelStyle = {
@@ -171,6 +209,8 @@ class StudentList extends Component {
               <span>Parent Email: {student.parentemail}</span>
               <br></br>
               <span>Notes: {student.notes}</span>
+              <br></br>
+              <Button onClick={() => this.removeData(student)}>Remove</Button>
             </Panel>
           ))}
         </Collapse>
