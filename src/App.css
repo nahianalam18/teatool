@@ -5,6 +5,19 @@
   height: 40vmin;
   pointer-events: none;
 }
+.tProf {
+  border-radius: 50%;
+  height: 25%;
+  margin-top: 50px;
+}
+.lAl {
+  align-items: left;
+  text-align: left;
+}
+.iconmarg {
+  margin-right: 5px;
+  margin-left: 10px;
+}
 .CenterA {
   align-items: center;
   justify-content: center;

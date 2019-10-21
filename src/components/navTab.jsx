@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import StudentList from "./listStudent";
 import Homepage from "./home";
 import { Tabs, Button } from "antd";
+import TeacherProfile from "./teacherProfile";
 
 const { TabPane } = Tabs;
 
@@ -20,7 +21,7 @@ class TopTab extends Component {
             <StudentList></StudentList>
           </TabPane>
           <TabPane tab="Teacher Profile" key="3">
-            Content of tab 3
+            <TeacherProfile />
           </TabPane>
         </Tabs>
       </div>

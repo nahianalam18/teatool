@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Collapse, Icon, Button } from "antd";
 import UserForm from "./UserForm";
+import Tags from "./tags";
 import * as Firebase from "firebase";
-import { RaisedButton } from "material-ui";
 import firebaseConfig from "../config";
 
 const { Panel } = Collapse;
@@ -14,7 +14,7 @@ class StudentList extends Component {
   state = {
     students: [
       {
-        id: 1,
+        id: 0,
         firstname: "Catherine",
         lastname: "Bullers",
         grade: "1.0.7",
@@ -23,7 +23,7 @@ class StudentList extends Component {
         parentemail: "cbullers0@meetup.com"
       },
       {
-        id: 2,
+        id: 1,
         firstname: "Annadiana",
         lastname: "De Ferrari",
         grade: "7.9.0",
@@ -32,7 +32,7 @@ class StudentList extends Component {
         parentemail: "adeferrari1@youtu.be"
       },
       {
-        id: 3,
+        id: 2,
         firstname: "Riley",
         lastname: "Fretson",
         grade: "0.7.3",
@@ -41,7 +41,7 @@ class StudentList extends Component {
         parentemail: "rfretson2@mozilla.com"
       },
       {
-        id: 4,
+        id: 3,
         firstname: "Clim",
         lastname: "Eglise",
         grade: "5.32",
@@ -50,7 +50,7 @@ class StudentList extends Component {
         parentemail: "ceglise3@feedburner.com"
       },
       {
-        id: 5,
+        id: 4,
         firstname: "Vanya",
         lastname: "Bewshaw",
         grade: "5.7.8",
@@ -59,7 +59,7 @@ class StudentList extends Component {
         parentemail: "vbewshaw4@earthlink.net"
       },
       {
-        id: 6,
+        id: 5,
         firstname: "Joseito",
         lastname: "Slayford",
         grade: "5.2",
@@ -68,7 +68,7 @@ class StudentList extends Component {
         parentemail: "jslayford5@ning.com"
       },
       {
-        id: 7,
+        id: 6,
         firstname: "Bride",
         lastname: "Fullbrook",
         grade: "7.3.0",
@@ -77,7 +77,7 @@ class StudentList extends Component {
         parentemail: "bfullbrook6@youtu.be"
       },
       {
-        id: 8,
+        id: 7,
         firstname: "Kristine",
         lastname: "Baiden",
         grade: "0.3.6",
@@ -86,7 +86,7 @@ class StudentList extends Component {
         parentemail: "kbaiden7@timesonline.co.uk"
       },
       {
-        id: 9,
+        id: 8,
         firstname: "Richy",
         lastname: "Routham",
         grade: "0.17",
@@ -95,7 +95,7 @@ class StudentList extends Component {
         parentemail: "rroutham8@fema.gov"
       },
       {
-        id: 10,
+        id: 9,
         firstname: "Stephie",
         lastname: "Nerne",
         grade: "0.85",
@@ -104,7 +104,7 @@ class StudentList extends Component {
         parentemail: "snerne9@nbcnews.com"
       },
       {
-        id: 11,
+        id: 10,
         firstname: "Amil",
         lastname: "Diwell",
         grade: "0.73",
@@ -113,7 +113,7 @@ class StudentList extends Component {
         parentemail: "adiwella@npr.org"
       },
       {
-        id: 12,
+        id: 11,
         firstname: "Kristel",
         lastname: "Kacheler",
         grade: "1.0.4",
@@ -123,6 +123,7 @@ class StudentList extends Component {
       }
     ]
   };
+
   writeUserData = () => {
     Firebase.database()
       .ref("/")
@@ -166,9 +167,13 @@ class StudentList extends Component {
     });
   };
   removeData = developer => {
+    console.log(this.state.students.length);
     console.log(developer);
+    var value = this.state.students[developer.id - 1];
+    console.log(value);
     var array = [...this.state.students];
-    array.splice(developer.id - 1, 1);
+    array.splice(-1, 1);
+
     this.setState({ students: array });
   };
 
@@ -191,7 +196,7 @@ class StudentList extends Component {
               <Icon type="caret-right" rotate={isActive ? 90 : 0} />
             )}
           >
-            <Panel header="Add New Student">
+            <Panel onClick={this.handleInputConfirm} header="Add New Student">
               <UserForm userInfo={this.addStudent} />
             </Panel>
           </Collapse>
@@ -202,6 +207,7 @@ class StudentList extends Component {
               header={student.firstname + " " + student.lastname}
               key={student.id}
             >
+              <Tags color="Green" />
               <span>Age: {student.age}</span>
               <br></br>
               <span>Grade: {student.interestLevel}</span>

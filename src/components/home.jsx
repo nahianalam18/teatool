@@ -49,8 +49,7 @@ class Homepage extends Component {
                 offset={0}
                 duration={500}
               ></Link>
-              <Icon type="contacts" spin />
-              Contact
+              <Icon type="contacts" spin /> Contact
             </Menu.Item>
           </Menu>
         </div>
