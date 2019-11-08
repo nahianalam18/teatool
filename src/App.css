@@ -5,6 +5,19 @@
   height: 40vmin;
   pointer-events: none;
 }
+.tProf {
+  border-radius: 50%;
+  height: 25%;
+  margin-top: 50px;
+}
+.lAl {
+  align-items: left;
+  text-align: left;
+}
+.iconmarg {
+  margin-right: 5px;
+  margin-left: 10px;
+}
 .CenterA {
   align-items: center;
   justify-content: center;
@@ -17,7 +30,7 @@
   background-color: white;
   height: 100vh;
   text-align: center;
-  padding-top: 1100px;
+  padding-top: 1250px;
   background-image: url("./components/teacher.png");
   background-position: center;
   background-repeat: no-repeat;
@@ -37,13 +50,15 @@
   color: black;
   background: white;
 }
+
 .homemenu {
   background-color: black;
   color: black;
   text-align: center;
   position: sticky;
-  top: 10;
+  top: 0;
   width: 100%;
+  top: 10;
 }
 .home1 {
   background-color: #282c34;

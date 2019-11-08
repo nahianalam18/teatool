@@ -6,12 +6,6 @@ class Homepage extends Component {
   state = {
     current: "mail"
   };
-  handleClick = e => {
-    console.log("click ", e);
-    this.setState({
-      current: e.key
-    });
-  };
   render() {
     return (
       <React.Fragment>
@@ -55,8 +49,7 @@ class Homepage extends Component {
                 offset={0}
                 duration={500}
               ></Link>
-              <Icon type="contacts" spin />
-              Contact
+              <Icon type="contacts" spin /> Contact
             </Menu.Item>
           </Menu>
         </div>

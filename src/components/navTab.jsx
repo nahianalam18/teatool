@@ -6,6 +6,7 @@ import Login from "./login";
 //import AddClass from "./addClass";
 import SignUp from "./SignUp";
 import { Tabs, Button } from "antd";
+import TeacherProfile from "./teacherProfile";
 
 const { TabPane } = Tabs;
 
@@ -24,7 +25,7 @@ class TopTab extends Component {
             <StudentList></StudentList>
           </TabPane>
           <TabPane tab="Teacher Profile" key="3">
-            <Teacher></Teacher>
+         //   <TeacherProfile />
           </TabPane>
           <TabPane tab="Sign Up" key="4">
             <SignUp> </SignUp>
