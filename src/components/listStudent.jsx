@@ -127,6 +127,7 @@ class StudentList extends Component {
       notes: e.notes,
       id: this.state.students.length + 1
     };
+    
     console.log(student);
     let students = [...this.state.students, student];
     this.setState({
