@@ -1,55 +1,57 @@
+//reference: https://github.com/lingonsaft/React-FirebaseUi-Authentication/blob/master/src/App.js
+
+
 import React, { Component } from "react";
-import "./SignUp.css";
+import firebase from "firebase";
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 
-class Login extends Component {
-  
-    handleLogin = e => {
-      e.preventDefault();
-    };
-    handleChange = e => {
-      e.preventDefault();
-      };
-
-    render() {
-      return (
-        <div className="full-wrap">
-          <div className="form-wrapper">
-            <h1>Create Account</h1>
-            <form onSubmit={this.handleLogin} noValidate>
-  
-              <div className="email">
-                <label htmlFor="email">Email</label>
-                <input
-                  placeholder="Email"
-                  type="email"
-                  name="email"
-                  noValidate
-                  onChange={this.handleChange}
-                />
-              </div>
-  
-              <div className="password">
-                <label htmlFor="password">Password</label>
-                <input
-                  className=""
-                  placeholder="Password"
-                  type="password"
-                  name="password"
-                  noValidate
-                  onChange={this.handleChange}
-                />
-              </div>
-  
-              <div className="login">
-                <button type="login">Login</button>
-                <small>Does not Have an Account?</small><button>Sign Up</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      );
+class App extends Component {
+  state = { isSignedIn: false }
+  uiConfig = {
+    //signInFlow: "popup",
+    signInOptions: [
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+      firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+      firebase.auth.EmailAuthProvider.PROVIDER_ID,
+    ],
+    callbacks: {
+      signInSuccess: () => false
     }
   }
-  
-  export default Login;
+  componentDidMount = () => {
+    firebase.auth().onAuthStateChanged(user => {
+      this.setState({ isSignedIn: !!user })
+      console.log("user", user)
+    })
+  }
+
+  render() {
+      return(
+        <div className="login">
+        <form >
+        {this.state.isSignedIn ? (
+          <span>
+            <div>Signed In!</div>
+            <button onClick={() => firebase.auth().signOut()}>Sign Out!</button>
+            <h1>Welcome {firebase.auth().currentUser.displayName}</h1>
+            <img
+              alt="profile"
+              src={firebase.auth().currentUser.photoURL}
+            />
+          </span>
+        ) : (
+          <StyledFirebaseAuth
+            uiConfig={this.uiConfig}
+            firebaseAuth={firebase.auth()}
+          />
+        )}
+      </form>
+      </div>
+      )
+    }
+  }
+
+
+export default App
 

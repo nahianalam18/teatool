@@ -2,13 +2,11 @@
 
 import React, { Component } from 'react';
 import REACTDOM from 'react-dom';
-//import { Router, Route} from 'react-router';
+import { Router, Route} from 'react-router';
 import "./teachersProfile.css";
 import { Grid , Cell} from 'react-mdl';
 import Toggle from "./toggle";
 import backGroundButton from "./backGround";
-// import App from '../App';
-
 
 export default class Teacher extends Component {
 
