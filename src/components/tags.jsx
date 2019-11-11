@@ -28,7 +28,6 @@ class Tags extends Component {
     if (inputValue && tags.indexOf(inputValue) === -1) {
       tags = [...tags, inputValue];
     }
-    console.log(tags);
     this.setState({
       tags,
       inputVisible: false,
@@ -49,7 +48,7 @@ class Tags extends Component {
               closable={index !== 0}
               onClose={() => this.handleClose(tag)}
             >
-              {isLongTag ? `${tag.slice(0, 20)}...` : tag}
+              {isLongTag ? `${tag.idslice(0, 20)}...` : tag}
             </Tag>
           );
           return isLongTag ? (

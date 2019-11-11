@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Collapse, Icon, Button } from "antd";
+import { Collapse, Icon, Button, Progress } from "antd";
+import "bootstrap/dist/css/bootstrap.min.css";
 import UserForm from "./UserForm";
 import Tags from "./tags";
 import * as Firebase from "firebase";
@@ -7,150 +8,44 @@ import firebaseConfig from "../config";
 
 const { Panel } = Collapse;
 
-Firebase.initializeApp(firebaseConfig);
+Firebase.initializeApp(firebaseConfig); // Connecting to the database
 Firebase.analytics();
 
 class StudentList extends Component {
   state = {
-    students: [
-      {
-        id: 0,
-        firstname: "Catherine",
-        lastname: "Bullers",
-        grade: "1.0.7",
-        age: 9,
-        notes: "Macropus eugenii",
-        parentemail: "cbullers0@meetup.com"
-      },
-      {
-        id: 1,
-        firstname: "Annadiana",
-        lastname: "De Ferrari",
-        grade: "7.9.0",
-        age: 5,
-        notes: "Prionace glauca",
-        parentemail: "adeferrari1@youtu.be"
-      },
-      {
-        id: 2,
-        firstname: "Riley",
-        lastname: "Fretson",
-        grade: "0.7.3",
-        age: 5,
-        notes: "Psittacula krameri",
-        parentemail: "rfretson2@mozilla.com"
-      },
-      {
-        id: 3,
-        firstname: "Clim",
-        lastname: "Eglise",
-        grade: "5.32",
-        age: 6,
-        notes: "unavailable",
-        parentemail: "ceglise3@feedburner.com"
-      },
-      {
-        id: 4,
-        firstname: "Vanya",
-        lastname: "Bewshaw",
-        grade: "5.7.8",
-        age: 9,
-        notes: "Acridotheres tristis",
-        parentemail: "vbewshaw4@earthlink.net"
-      },
-      {
-        id: 5,
-        firstname: "Joseito",
-        lastname: "Slayford",
-        grade: "5.2",
-        age: 7,
-        notes: "Macaca radiata",
-        parentemail: "jslayford5@ning.com"
-      },
-      {
-        id: 6,
-        firstname: "Bride",
-        lastname: "Fullbrook",
-        grade: "7.3.0",
-        age: 7,
-        notes: "Lamprotornis superbus",
-        parentemail: "bfullbrook6@youtu.be"
-      },
-      {
-        id: 7,
-        firstname: "Kristine",
-        lastname: "Baiden",
-        grade: "0.3.6",
-        age: 6,
-        notes: "Helogale undulata",
-        parentemail: "kbaiden7@timesonline.co.uk"
-      },
-      {
-        id: 8,
-        firstname: "Richy",
-        lastname: "Routham",
-        grade: "0.17",
-        age: 6,
-        notes: "Vulpes vulpes",
-        parentemail: "rroutham8@fema.gov"
-      },
-      {
-        id: 9,
-        firstname: "Stephie",
-        lastname: "Nerne",
-        grade: "0.85",
-        age: 6,
-        notes: "Chauna torquata",
-        parentemail: "snerne9@nbcnews.com"
-      },
-      {
-        id: 10,
-        firstname: "Amil",
-        lastname: "Diwell",
-        grade: "0.73",
-        age: 7,
-        notes: "Spheniscus magellanicus",
-        parentemail: "adiwella@npr.org"
-      },
-      {
-        id: 11,
-        firstname: "Kristel",
-        lastname: "Kacheler",
-        grade: "1.0.4",
-        age: 10,
-        notes: "Vulpes vulpes",
-        parentemail: "kkachelerb@dmoz.org"
-      }
-    ]
+    students: [{}]
   };
 
   writeUserData = () => {
+    // Writing data to database
     Firebase.database()
       .ref("/")
-      .set(this.state);
+      .set(this.state); // Send State data to database
     console.log("DATA SAVED");
   };
 
   getUserData = () => {
+    // Fetch data from database
     let ref = Firebase.database().ref("/");
     ref.on("value", snapshot => {
       const state = snapshot.val();
-      this.setState(state);
+      this.setState(state); // Save database data to state to how on webpage
     });
     console.log("DATA RETRIEVED");
   };
   componentDidMount() {
-    this.getUserData();
+    this.getUserData(); // Call getUserData function
   }
 
   componentDidUpdate(prevProps, prevState) {
     // check on previous state
     // only write when it's different with the new state
     if (prevState !== this.state) {
-      this.writeUserData();
+      this.writeUserData(); // Writing data to database automatically
     }
   }
   addStudent = e => {
+    // Add a student to the state.
     const student = {
       firstname: e.firstname,
       lastname: e.lastname,
@@ -158,23 +53,74 @@ class StudentList extends Component {
       age: e.age,
       parentemail: e.parentemail,
       notes: e.notes,
-      id: this.state.students.length + 1
+      id: this.state.students.length,
+      progressLeadership: 0,
+      progressCommunication: 0,
+      progressEmpathy: 0,
+      progressCreativity: 0
     };
     console.log(student);
     let students = [...this.state.students, student];
     this.setState({
-      students: students
+      students: students // Update state after adding the new student entry
     });
   };
   removeData = developer => {
+    // Remove a student from the list
     console.log(this.state.students.length);
-    console.log(developer);
+    //console.log(developer);
     var value = this.state.students[developer.id - 1];
     console.log(value);
     var array = [...this.state.students];
     array.splice(-1, 1);
 
-    this.setState({ students: array });
+    this.setState({ students: array }); // Update state after removing the selected student
+  };
+
+  incrementProgress = (event, des) => {
+    var value = this.state.students[event.id];
+    //Increment progress of Leadership value by 1
+    if (des === "lead") value.progressLeadership = value.progressLeadership + 1;
+    //Increment progress of Communication value by 1
+    else if (des === "comm")
+      value.progressCommunication = value.progressCommunication + 1;
+    //Increment progress of Empathy value by 1
+    else if (des === "emp") value.progressEmpathy = value.progressEmpathy + 1;
+    //Increment progress of Communication value by 1
+    else if (des === "crea")
+      value.progressCreativity = value.progressCreativity + 1;
+
+    let info = [...this.state.students];
+    this.setState({
+      students: info // Update state after progress has been incremented
+    });
+  };
+  decrementProgress = (event, des) => {
+    var value = this.state.students[event.id];
+
+    //Decrement progress of Leadership value by 1
+    if (des === "lead") value.progressLeadership = value.progressLeadership - 1;
+    //Decrement progress of Communication value by 1
+    else if (des === "comm")
+      value.progressCommunication = value.progressCommunication - 1;
+    //Decrement progress of Empathy value by 1
+    else if (des === "emp") value.progressEmpathy = value.progressEmpathy - 1;
+    //Decrement progress of Communication value by 1
+    else if (des === "crea")
+      value.progressCreativity = value.progressCreativity - 1;
+
+    let info = [...this.state.students];
+    this.setState({
+      students: info // Update state after the progress has been decremented
+    });
+  };
+  giveColorOfBar = number => {
+    // Return a red color hex value to be rendered
+    if (number >= 0 && number < 50) return "#FF0004";
+    // Return a yellow color hex value to be rendered
+    else if (number >= 50 && number < 80) return "#FFC900";
+    // Return a green color hex value to be rendered
+    else if (number >= 80) return "#4CFF00";
   };
 
   customPanelStyle = {
@@ -216,7 +162,87 @@ class StudentList extends Component {
               <br></br>
               <span>Notes: {student.notes}</span>
               <br></br>
-              <Button onClick={() => this.removeData(student)}>Remove</Button>
+              {
+                <Progress
+                  percent={student.progressLeadership}
+                  status="active"
+                  strokeColor={this.giveColorOfBar(student.progressLeadership)}
+                />
+              }
+              <span>Leadership</span>
+              <Icon
+                style={{ margin: "5px" }}
+                type="plus"
+                onClick={() => this.incrementProgress(student, "lead")}
+              />{" "}
+              <Icon
+                style={{ margin: "5px" }}
+                type="minus"
+                onClick={() => this.decrementProgress(student, "lead")}
+              />{" "}
+              <br></br>
+              {
+                <Progress
+                  percent={student.progressCommunication}
+                  status="active"
+                  strokeColor={this.giveColorOfBar(
+                    student.progressCommunication
+                  )}
+                />
+              }
+              <span>Communication</span>
+              <Icon
+                style={{ margin: "5px" }}
+                type="plus"
+                onClick={() => this.incrementProgress(student, "comm")}
+              />{" "}
+              <Icon
+                style={{ margin: "5px" }}
+                type="minus"
+                onClick={() => this.decrementProgress(student, "comm")}
+              />{" "}
+              <br></br>
+              {
+                <Progress
+                  percent={student.progressEmpathy}
+                  status="active"
+                  strokeColor={this.giveColorOfBar(student.progressEmpathy)}
+                />
+              }
+              <span>Empathy</span>
+              <Icon
+                style={{ margin: "5px" }}
+                type="plus"
+                onClick={() => this.incrementProgress(student, "emp")}
+              />{" "}
+              <Icon
+                style={{ margin: "5px" }}
+                type="minus"
+                onClick={() => this.decrementProgress(student, "emp")}
+              />{" "}
+              <br></br>
+              {
+                <Progress
+                  percent={student.progressCreativity}
+                  status="active"
+                  strokeColor={this.giveColorOfBar(student.progressCreativity)}
+                />
+              }
+              <span>Creativity</span>
+              <Icon
+                style={{ margin: "5px" }}
+                type="plus"
+                onClick={() => this.incrementProgress(student, "crea")}
+              />{" "}
+              <Icon
+                style={{ margin: "5px" }}
+                type="minus"
+                onClick={() => this.decrementProgress(student, "crea")}
+              />{" "}
+              <br></br>
+              <Button type="danger" onClick={() => this.removeData(student)}>
+                Remove
+              </Button>
             </Panel>
           ))}
         </Collapse>

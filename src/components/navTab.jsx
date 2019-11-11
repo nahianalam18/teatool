@@ -1,19 +1,17 @@
 import React, { Component } from "react";
 import StudentList from "./listStudent";
 import Homepage from "./home";
-import { Tabs, Button } from "antd";
+import { Tabs } from "antd";
 import TeacherProfile from "./teacherProfile";
 
 const { TabPane } = Tabs;
-
-const operations = <Button type="primary">Login</Button>;
 
 class TopTab extends Component {
   state = {};
   render() {
     return (
       <div>
-        <Tabs tabBarExtraContent={operations}>
+        <Tabs>
           <TabPane tab="Home" key="1">
             <Homepage></Homepage>
           </TabPane>
