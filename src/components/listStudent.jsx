@@ -59,6 +59,7 @@ class StudentList extends Component {
       progressEmpathy: 0,
       progressCreativity: 0
     };
+    
     console.log(student);
     let students = [...this.state.students, student];
     this.setState({

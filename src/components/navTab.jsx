@@ -3,11 +3,11 @@ import StudentList from "./listStudent";
 import Homepage from "./home";
 import { Tabs } from "antd";
 import TeacherProfile from "./teacherProfile";
+import Login from "./login";
 
 const { TabPane } = Tabs;
 
 class TopTab extends Component {
-  state = {};
   render() {
     return (
       <div>
@@ -28,3 +28,12 @@ class TopTab extends Component {
 }
 
 export default TopTab;
+
+//ReactDom.render(<Teacher/>, document.getElementById("addclass"));
+
+// {
+//   <TabPane tab="add Class" key="4">
+// <AddClass>
+//   {/* <form onSubmit = {fields => this.onSubmit(fields)} /> */}
+// </AddClass>
+// }
