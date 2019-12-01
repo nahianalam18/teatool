@@ -3,6 +3,7 @@
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import React, { Component } from "react";
+import { Button } from "antd";
 import firebase from "firebase";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { NavigationBar } from "./navigation";
@@ -13,6 +14,7 @@ import Profile from './profile';
 class Login extends Component {
   state = { isSignedIn: false} 
   
+  state = { isSignedIn: false };
   uiConfig = {
     //signInFlow: "popup",
     signInOptions: [
@@ -22,7 +24,7 @@ class Login extends Component {
     callbacks: {
       signInSuccess: () => false
     }
-  }
+  };
   componentDidMount = () => {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ isSignedIn: !!user })
@@ -65,7 +67,29 @@ class Login extends Component {
       </div>
       );
     }
-  }
+     
+  // render() {
+  //   return (
+  //     <div className="CenterA">
+  //       <form>
+  //         {this.state.isSignedIn ? (
+  //           <span>
+  //             <Button onClick={() => firebase.auth().signOut()}>
+  //               Sign Out
+  //             </Button>
+  //             <h1>Welcome {firebase.auth().currentUser.displayName}</h1>
+  //             <img alt="profile" src={firebase.auth().currentUser.photoURL} />
+  //           </span>
+  //         ) : (
+  //           <StyledFirebaseAuth
+  //             uiConfig={this.uiConfig}
+  //             firebaseAuth={firebase.auth()}
+  //           />
+  //         )}
+  //       </form>
+  //     </div>
+  //   );
+  // }
+}
 
-export default Login
-
+export default Login;
