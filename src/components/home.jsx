@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Menu, Icon } from "antd";
 import { Link } from "react-scroll";
+//import Contact from "./contact";
 
 class Homepage extends Component {
   state = {
@@ -267,7 +268,7 @@ class Homepage extends Component {
           </p>
         </div>
         <div className="home3" id="contact">
-          <h1>Hello Contact</h1>
+          
         </div>
       </React.Fragment>
     );

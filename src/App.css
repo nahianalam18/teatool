@@ -80,7 +80,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -103,14 +103,17 @@
   }
 }
 
+
 .login{
-  background-color: #d9efe8;
-  border-style: solid;
-  border-block-color: #000000;
   position:relative;
-  width:1300px;
-  height:580px;
-  margin:0% auto;
-  overflow:hidden;
+  width:100%;
+  height:100%;
 }
 
+.avatar{
+  border-radius: 50%;
+}
+
+.login-nav{
+  float : right;
+}

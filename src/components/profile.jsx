@@ -14,7 +14,6 @@ class Profile extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleChange(event) {
-    //  console.log(event);
     this.setState({ state: event.target });
   }
 
