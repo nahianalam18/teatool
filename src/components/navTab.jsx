@@ -3,7 +3,6 @@ import StudentList from "./listStudent";
 import Homepage from "./home";
 import { Tabs } from "antd";
 import TeacherProfile from "./teacherProfile";
-import Login from "./login";
 
 const { TabPane } = Tabs;
 
