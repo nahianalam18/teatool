@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Menu, Icon } from "antd";
 import { Link } from "react-scroll";
-//import Contact from "./contact";
+import EmailForm from "./emailform";
 
 class Homepage extends Component {
   state = {
@@ -62,6 +62,7 @@ class Homepage extends Component {
             She suspicion dejection saw instantly
           </h2>
           <p>
+            <EmailForm />
             Perpetual sincerity out suspected necessary one but provision
             satisfied. Respect nothing use set waiting pursuit nay you looking.
             If on prevailed concluded ye abilities. Address say you new but
@@ -267,9 +268,7 @@ class Homepage extends Component {
             To household rapturous fulfilled attempted on so.
           </p>
         </div>
-        <div className="home3" id="contact">
-          
-        </div>
+        <div className="home3" id="contact"></div>
       </React.Fragment>
     );
   }

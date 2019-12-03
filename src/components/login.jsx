@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { Button } from "antd";
 import firebase from "firebase";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-import Inline from "./inline";
+// import Inline from "./inline";
 
 class Login extends Component {
   state = { isSignedIn: false };
@@ -30,7 +30,6 @@ class Login extends Component {
         <form>
           {this.state.isSignedIn ? (
             <span>
-              <Inline></Inline>
               <Button onClick={() => firebase.auth().signOut()}>
                 Sign Out
               </Button>
