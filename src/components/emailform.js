@@ -1,11 +1,8 @@
 import React, { Component } from "react";
 import { Form, FormGroup, Input, Label, Button } from "reactstrap";
-import { Collapse, Icon } from "antd";
 
 import "bootstrap/dist/css/bootstrap.css";
 import axios from "axios";
-
-const { Panel } = Collapse;
 
 class Emailform extends Component {
   constructor() {
@@ -67,7 +64,7 @@ class Emailform extends Component {
           ></Input>
         </FormGroup>
 
-        <Button>Submit</Button>
+        <Button onClick={this.handleSubmit}>Submit</Button>
       </Form>
     );
   }

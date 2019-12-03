@@ -27,9 +27,11 @@ class Login extends Component {
 
   nextStep = () => {
     const { step } = this.state;
-    this.setState({
-      step: step + 1
-    });
+    if (firebase.auth().currentUser.displayName === "James Guru") {
+      this.setState({
+        step: step + 1
+      });
+    }
   };
 
   prevStep = () => {
@@ -38,11 +40,11 @@ class Login extends Component {
       step: step - 1
     });
   };
-
   render() {
     const { step } = this.state;
+
     switch (step) {
-      case 0:
+      default:
         return (
           <div className="CenterA">
             <form>
