@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { Form, FormGroup, Input, Label, Button } from "reactstrap";
+import { Collapse, Icon } from "antd";
+
 import "bootstrap/dist/css/bootstrap.css";
 import axios from "axios";
+
+const { Panel } = Collapse;
 
 class Emailform extends Component {
   constructor() {
@@ -34,7 +38,7 @@ class Emailform extends Component {
   }
   render() {
     return (
-      <Form onSubmit={this.handleSubmit} style={{ width: "600px" }}>
+      <Form onSubmit={this.handleSubmit}>
         <FormGroup>
           <Label for="name">Name:</Label>
           <Input type="text" name="name" onChange={this.handleChange}></Input>

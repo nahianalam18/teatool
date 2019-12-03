@@ -62,7 +62,6 @@ class Homepage extends Component {
             She suspicion dejection saw instantly
           </h2>
           <p>
-            <EmailForm />
             Perpetual sincerity out suspected necessary one but provision
             satisfied. Respect nothing use set waiting pursuit nay you looking.
             If on prevailed concluded ye abilities. Address say you new but
@@ -268,7 +267,12 @@ class Homepage extends Component {
             To household rapturous fulfilled attempted on so.
           </p>
         </div>
-        <div className="home3" id="contact"></div>
+        <div className="home3" id="contact">
+          <h1 style={{ color: "yellowgreen" }}>Send a message to Teacher</h1>
+          <br></br>
+          <br></br>
+          <EmailForm />
+        </div>
       </React.Fragment>
     );
   }
