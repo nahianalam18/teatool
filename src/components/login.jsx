@@ -3,10 +3,11 @@ import React, { Component } from "react";
 import { Button } from "antd";
 import firebase from "firebase";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+import StudentList from "./listStudent";
 // import Inline from "./inline";
 
 class Login extends Component {
-  state = { isSignedIn: false };
+  state = { isSignedIn: false, step: 0 };
   uiConfig = {
     //signInFlow: "popup",
     signInOptions: [
@@ -24,27 +25,67 @@ class Login extends Component {
     });
   };
 
+  nextStep = () => {
+    const { step } = this.state;
+    this.setState({
+      step: step + 1
+    });
+  };
+
+  prevStep = () => {
+    const { step } = this.state;
+    this.setState({
+      step: step - 1
+    });
+  };
+
   render() {
-    return (
-      <div className="CenterA">
-        <form>
-          {this.state.isSignedIn ? (
-            <span>
-              <Button onClick={() => firebase.auth().signOut()}>
-                Sign Out
-              </Button>
-              <h1>Welcome {firebase.auth().currentUser.displayName}</h1>
-              <img alt="profile" src={firebase.auth().currentUser.photoURL} />
-            </span>
-          ) : (
-            <StyledFirebaseAuth
-              uiConfig={this.uiConfig}
-              firebaseAuth={firebase.auth()}
-            />
-          )}
-        </form>
-      </div>
-    );
+    const { step } = this.state;
+    switch (step) {
+      case 0:
+        return (
+          <div className="CenterA">
+            <form>
+              {this.state.isSignedIn ? (
+                <span>
+                  <Button onClick={() => firebase.auth().signOut()}>
+                    Sign Out
+                  </Button>
+                  <Button onClick={this.nextStep}>Next</Button>
+                  <h1>Welcome {firebase.auth().currentUser.displayName}</h1>
+                  <img
+                    alt="profile"
+                    src={firebase.auth().currentUser.photoURL}
+                  />
+                  <br></br>
+                </span>
+              ) : (
+                <StyledFirebaseAuth
+                  uiConfig={this.uiConfig}
+                  firebaseAuth={firebase.auth()}
+                />
+              )}
+            </form>
+          </div>
+        );
+      case 1:
+        return (
+          <div>
+            {this.state.isSignedIn ? (
+              <span>
+                <StudentList />
+              </span>
+            ) : (
+              <StyledFirebaseAuth
+                uiConfig={this.uiConfig}
+                firebaseAuth={firebase.auth()}
+              />
+            )}{" "}
+            <br></br>
+            <Button onClick={this.prevStep}>Back</Button>
+          </div>
+        );
+    }
   }
 }
 

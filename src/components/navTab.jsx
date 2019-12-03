@@ -14,9 +14,9 @@ class TopTab extends Component {
           <TabPane tab="Home" key="1">
             <Homepage></Homepage>
           </TabPane>
-          <TabPane tab="Student List" key="2">
+          {/* <TabPane tab="Student List" key="2">
             <StudentList></StudentList>
-          </TabPane>
+          </TabPane> */}
           <TabPane tab="Teacher Profile" key="3">
             <TeacherProfile />
           </TabPane>
